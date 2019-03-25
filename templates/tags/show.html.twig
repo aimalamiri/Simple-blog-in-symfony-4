@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tags{% endblock %}
+
+{% block main_container %}
+    <div class="col-md-12 my-5">
+        <h1>Tags</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ tag.title }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ tag.id }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('tags_index') }}">back to list</a>
+
+        {{ include('tags/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

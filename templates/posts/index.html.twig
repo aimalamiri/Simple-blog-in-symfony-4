@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Posts index{% endblock %}
+
+{% block main_container %}
+    <div class="col-md-12 my-5">
+        <h1>Posts index</h1>
+
+        <table class="table table-striped table-bordered table-condensed table-striped">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Text</th>
+                <th>Date</th>
+                <th>Tags</th>
+                <th>Url</th>
+                <th>Views</th>
+                <th>actions</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+                <tr>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.text | slice(0, 20) }}</td>
+                    <td>{{ post.date ? post.Date|date('Y-m-d') : '' }}</td>
+                    <td>
+                    {% for tag in post.tags %}
+                        {{ tag.title }}
+                    {% else %}
+                        empty
+                    {% endfor %}
+                    </td>
+                    <td><a href="href="{{ path("public_site_post", {'url': post.url }) }}">{{ post.url }}</a></td>
+                    <td><span class="badge badge-pill badge-primary">{{ post.views }}</span></td>
+                    <td>
+                        <a href="{{ path('posts_edit', {'id': post.id}) }}">edit</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('posts_change_status', {'id': post.id }) }}" class="btn btn-primary btn-sm">
+                            {% if post.visible == true %}
+                                Disable
+                            {% else %}
+                                Enable
+                            {% endif %}
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('posts_new') }}" class="btn btn-primary">Create new</a>
+    </div>
+{% endblock %}

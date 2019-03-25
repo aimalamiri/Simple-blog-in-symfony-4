@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block main_container %}
+    <div class="col-md-12 my-5">
+        <div class="row">
+            {% for post in posts %}
+                <div class="jumbotron w-100">
+                    <h1 class="display-4">{{ post.title }}</h1>
+                    <p class="lead">{{ post.date ? post.Date|date('Y-m-d') : '' }}</p>
+                    <hr class="my-4">
+                    <p class="lead">
+                        <a class="btn btn-primary btn-lg" href="{{ path("public_site_post", {'url': post.url }) }}">Read More</a>
+                    </p>
+                </div>
+            {% else %}
+                <h3>No Posts Found</h3>
+            {% endfor %}
+        </div>
+        <tfoot>
+        <tr>
+            <td colspan="2">
+                {{ pagination(posts, 'page') }}
+            </td>
+        </tr>
+        </tfoot>
+    </div>
+{% endblock %}
