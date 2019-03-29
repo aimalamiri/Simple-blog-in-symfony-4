@@ -13,8 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class ApiController extends AbstractController
 {
     /**
- * @Route("/posts", name="posts_api")
- */
+     * @Route("/posts", name="posts_api")
+     */
     public function index()
     {
         $repository = $this->getDoctrine()->getRepository(Posts::class);
